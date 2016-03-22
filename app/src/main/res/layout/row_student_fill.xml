@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+        <TextView
+            android:hint="1"
+            android:textSize="25dp"
+            android:id="@+id/createrollNofixed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:hint=""
+            android:textSize="15dp"
+            android:textColor="#000"
+            android:layout_toRightOf="@id/createrollNofixed"
+            android:id="@+id/etStudentName"
+            android:layout_width="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>

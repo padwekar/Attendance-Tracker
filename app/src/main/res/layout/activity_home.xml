@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+    <RelativeLayout
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/btn_createClass"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            android:onClick="onHomeOptionSelected"
+            android:background="@drawable/create_class2"/>
+
+        <ImageButton
+            android:id="@+id/btn_viewClass"
+            android:layout_toRightOf="@id/btn_createClass"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            android:onClick="onHomeOptionSelected"
+            android:background="@drawable/view_class"/>
+
+        <ImageButton
+            android:id="@+id/btn_takeAttendance"
+            android:layout_below="@id/btn_createClass"
+            android:layout_margin="20dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:onClick="onHomeOptionSelected"
+            android:background="@drawable/take_attendance2"
+            />
+
+        <ImageButton
+            android:id="@+id/btn_settings"
+            android:layout_below="@id/btn_createClass"
+            android:layout_toRightOf="@id/btn_takeAttendance"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            android:onClick="onHomeOptionSelected"
+            android:background="@drawable/setting2"/>
+    </RelativeLayout>
+</RelativeLayout>
