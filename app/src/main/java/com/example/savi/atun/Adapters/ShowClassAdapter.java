@@ -15,12 +15,25 @@ import com.example.savi.atun.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by Savi on 20-03-2016.
- */
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.example.savi.atun.Activities.TakeAttendanceActivity;
+import com.example.savi.atun.Beans.ClassInfo;
+import com.example.savi.atun.Constatnts.Constants;
+import com.example.savi.atun.R;
+
+import java.util.ArrayList;
+
+
 public class ShowClassAdapter  extends RecyclerView.Adapter<ShowClassAdapter.ViewClassHolder>{
 
-    ArrayList<ClassInfo> classInfos = new ArrayList<ClassInfo>();
+    ArrayList<ClassInfo> classInfos = new ArrayList<>();
 
     public ShowClassAdapter(ArrayList<ClassInfo> classInfos) {
         this.classInfos = classInfos;
@@ -31,8 +44,8 @@ public class ShowClassAdapter  extends RecyclerView.Adapter<ShowClassAdapter.Vie
 
         LayoutInflater inflater = (LayoutInflater)viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.fragment_class_confirm,viewGroup,false);
-        ViewClassHolder holder = new ViewClassHolder(view);
-        return holder;
+
+        return new ViewClassHolder(view);
 
     }
 
@@ -63,18 +76,18 @@ public class ShowClassAdapter  extends RecyclerView.Adapter<ShowClassAdapter.Vie
                 @Override
                 public void onClick(View view) {
                     final String  studentString = classInfos.get(getAdapterPosition()).getStudentListString();
-                        Constants.updatedClassName = className.getText().toString();
-                         Constants.updatedSection   =section.getText().toString();
-                        Constants.updatedDepartment = department.getText().toString();
-                        Constants.updatedTotalStudent = Integer.parseInt(strength.getText().toString());
-                        Intent intent = new Intent(view.getContext(),TakeAttendanceActivity.class);
-                        intent.putExtra("studentString",studentString);
-                        view.getContext().startActivity(intent);
+                    Constants.updatedClassName = className.getText().toString();
+                    Constants.updatedSection   =section.getText().toString();
+                    Constants.updatedClassID = Constants.updatedClassName + Constants.updatedSection;
+                    Constants.updatedDepartment = department.getText().toString();
+                    Constants.updatedTotalStudent = Integer.parseInt(strength.getText().toString());
+                    Intent intent = new Intent(view.getContext(),TakeAttendanceActivity.class);
+                    intent.putExtra("studentString",studentString);
+                    view.getContext().startActivity(intent);
 
+                }
+            }  );
         }
-    }  );
-}
-}
+    }
 
 }
-

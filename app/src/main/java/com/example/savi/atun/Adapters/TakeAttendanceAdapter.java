@@ -16,14 +16,28 @@ import com.example.savi.atun.Database.DataHelper;
 import com.example.savi.atun.R;
 
 import java.util.ArrayList;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.TextView;
 
-/**
- * Created by Savi on 20-03-2016.
- */
+import com.example.savi.atun.Beans.StudentInfo;
+import com.example.savi.atun.Constatnts.Constants;
+import com.example.savi.atun.Database.DataHelper;
+import com.example.savi.atun.R;
+
+import java.util.ArrayList;
+
+
 public class TakeAttendanceAdapter extends RecyclerView.Adapter<TakeAttendanceAdapter.TakeAttendanceViewHolder> {
-       ArrayList<String> studentInfos = new ArrayList<String>();
+    ArrayList<String> studentInfos = new ArrayList<>();
     Context context;
-       boolean[] presentyRecorder ;
+    boolean[] presentyRecorder ;
     DataHelper dataHelper ;
     public TakeAttendanceAdapter(Context context ,ArrayList<String> studentInfos) {
         this.studentInfos = studentInfos;
@@ -66,8 +80,8 @@ public class TakeAttendanceAdapter extends RecyclerView.Adapter<TakeAttendanceAd
             isPresent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                isPresent.setChecked(isChecked);
-                                presentyRecorder[getAdapterPosition()]=isPresent.isChecked();
+                    isPresent.setChecked(isChecked);
+                    presentyRecorder[getAdapterPosition()]=isPresent.isChecked();
                 }
             });
 
@@ -75,10 +89,19 @@ public class TakeAttendanceAdapter extends RecyclerView.Adapter<TakeAttendanceAd
     }
 
     public void saveAttendance(){
-
         Constants.lastupdatedAttendance = new boolean[studentInfos.size()];
         Constants.lastupdatedAttendance =presentyRecorder;
-        dataHelper.insertAttenace(presentyRecorder);
+        String attendanceRecord = getStringfromBoolean(presentyRecorder);
+        dataHelper.insertAttenace(attendanceRecord);
+    }
 
+    private String getStringfromBoolean(boolean[] presentyRecorder) {
+        String booleanString ="";
+        String flag = "" ;
+        for(int i=0 ; i<presentyRecorder.length ; i++){
+            flag = (presentyRecorder[i])?"1":"0" ;
+            booleanString = booleanString + flag ;
+        }
+        return booleanString;
     }
 }

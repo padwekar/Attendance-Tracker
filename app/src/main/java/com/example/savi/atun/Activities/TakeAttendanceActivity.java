@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class TakeAttendanceActivity extends AppCompatActivity {
     ArrayList<String> studentList = new ArrayList<String>();
     TakeAttendanceFragment attendanceFragment;   ConfirmClassFrag confirmClassFrag ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
