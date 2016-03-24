@@ -31,7 +31,7 @@ import java.util.List;
 
 public class DataHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "myattendancedb";
+    public static final String DATABASE_NAME = "myattendancedb2";
     public static final String TABLE_CLASS_DATA = "classdata";
     public static final int DATABASE_VERSION = 1;
     public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_CLASS_DATA + "(srno INTEGER PRIMARY KEY AUTOINCREMENT, id TEXT ,name TEXT,section TEXT,department TEXT,strength INTEGER,studentlist TEXT)";
@@ -43,7 +43,7 @@ public class DataHelper extends SQLiteOpenHelper {
     public static final String  STRENGTH="strength";
     public static final String  CLASS_NAME="name";
     public static final String  STUDENT_LIST ="studentlist";
-
+    SQLiteDatabase sqLiteDatabase = getWritableDatabase();
     Context context ;
     public DataHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -71,17 +71,7 @@ public class DataHelper extends SQLiteOpenHelper {
         slotDialog(status, statusList);
     }
 
-    public void deleteData(String id){
-        SQLiteDatabase database = getWritableDatabase();
-        String table = TABLE_CLASS_DATA;
-        String whereClause = "id" + "=?";
-        String[] whereArgs = new String[] { id };
-        database.delete(table, whereClause, whereArgs);
-        Log.i("DELETED ROW",id);
-        database.execSQL("DROP TABLE IF EXISTS " + id);
-        Toast.makeText(context,"DELETED SUCCESSFULLY",Toast.LENGTH_SHORT).show();
 
-    }
     private void createTableifNotExist() {
         createClassTable(Constants.updatedClassID);
     }
@@ -153,7 +143,7 @@ public class DataHelper extends SQLiteOpenHelper {
         radioButton_slot1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(status[0])
+                if (status[0])
                     button_save.setText("Replace");
                 else
                     button_save.setText("Save");
@@ -182,7 +172,7 @@ public class DataHelper extends SQLiteOpenHelper {
         radioButton_slot3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(status[2])
+                if (status[2])
                     button_save.setText("Replace");
                 else
                     button_save.setText("Save");
@@ -246,7 +236,17 @@ public class DataHelper extends SQLiteOpenHelper {
         database.update(Constants.updatedClassID, values, "date=?", new String[]{date});
         database.close();
     }
+    public void deleteData(String id){
+        Log.i("DELETED ROW 0",id);
+        String table = TABLE_CLASS_DATA;
+        String whereClause = "id" + "=?";
+        String[] whereArgs = new String[] { id };
+        sqLiteDatabase.delete(table, whereClause, whereArgs);
+        Log.i("DELETED ROW", id);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + id);
+        Toast.makeText(context,"DELETED SUCCESSFULLY",Toast.LENGTH_SHORT).show();
 
+    }
     void confirmationDialog(String message, final String period, final String statusList){
         boolean flag ;
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

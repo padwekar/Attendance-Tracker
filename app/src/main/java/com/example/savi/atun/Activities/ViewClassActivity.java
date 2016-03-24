@@ -27,16 +27,17 @@ public class ViewClassActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_class);
-        dataHelper = new DataHelper(getApplicationContext());
+        dataHelper = new DataHelper(ViewClassActivity.this);
         classInfoList = dataHelper.getData();
         layoutManager = new LinearLayoutManager(this);
         recyclerView =(RecyclerView)findViewById(R.id.recyclerView_viewClass);
         recyclerView.setLayoutManager(layoutManager);
-        showClassAdapter = new ShowClassAdapter(classInfoList);
+        showClassAdapter = new ShowClassAdapter(ViewClassActivity.this,classInfoList);
         recyclerView.setAdapter(showClassAdapter);
     }
 
    public void delete(String classid){
+    //   DataHelper dbHelper = new DataHelper(ViewClassActivity.this);
        dataHelper.deleteData(classid);
 
     }

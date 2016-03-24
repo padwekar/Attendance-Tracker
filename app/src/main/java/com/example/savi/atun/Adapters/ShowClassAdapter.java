@@ -37,11 +37,14 @@ import java.util.ArrayList;
 
 
 public class ShowClassAdapter  extends RecyclerView.Adapter<ShowClassAdapter.ViewClassHolder>{
-
+    Context context;
+    DataHelper dataHelper ;
     ArrayList<ClassInfo> classInfos = new ArrayList<>();
     ViewClassActivity viewClassActivity = new ViewClassActivity();
-    public ShowClassAdapter(ArrayList<ClassInfo> classInfos) {
+    public ShowClassAdapter(Context context,ArrayList<ClassInfo> classInfos) {
         this.classInfos = classInfos;
+        this.context =context;
+        dataHelper = new DataHelper(context);
 
     }
 
@@ -109,7 +112,9 @@ public class ShowClassAdapter  extends RecyclerView.Adapter<ShowClassAdapter.Vie
                             Constants.updatedClassName = className.getText().toString();
                             Constants.updatedSection = section.getText().toString();
                             Constants.updatedClassID = Constants.updatedClassName + Constants.updatedSection;
-                            new ViewClassActivity().delete(Constants.updatedClassID);
+                            int tempos = getAdapterPosition();
+                            deleteData(Constants.updatedClassID);
+                            notifyItemRemoved(tempos);
                         }
                     });
                     builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -123,6 +128,11 @@ public class ShowClassAdapter  extends RecyclerView.Adapter<ShowClassAdapter.Vie
                 }
             });
         }
+    }
+
+    private void deleteData(String classId) {
+        dataHelper.deleteData(classId);
+
     }
 
 }

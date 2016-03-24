@@ -41,6 +41,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     }
 
     public void onSave(View view){
+
         attendanceFragment.callSaveAttendance();
     }
 
