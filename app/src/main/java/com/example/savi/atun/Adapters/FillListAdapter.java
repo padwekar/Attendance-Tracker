@@ -62,6 +62,7 @@ public class FillListAdapter extends ArrayAdapter {
             @Override
             public void afterTextChanged(Editable s) {
                 Constants.studentname[position] = edittext_studentName.getText().toString();
+
             }
         });
 

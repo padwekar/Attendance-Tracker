@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.savi.atun.Beans.ClassInfo;
 import com.example.savi.atun.Constatnts.Constants;
@@ -70,6 +71,17 @@ public class DataHelper extends SQLiteOpenHelper {
         slotDialog(status, statusList);
     }
 
+    public void deleteData(String id){
+        SQLiteDatabase database = getWritableDatabase();
+        String table = TABLE_CLASS_DATA;
+        String whereClause = "id" + "=?";
+        String[] whereArgs = new String[] { id };
+        database.delete(table, whereClause, whereArgs);
+        Log.i("DELETED ROW",id);
+        database.execSQL("DROP TABLE IF EXISTS " + id);
+        Toast.makeText(context,"DELETED SUCCESSFULLY",Toast.LENGTH_SHORT).show();
+
+    }
     private void createTableifNotExist() {
         createClassTable(Constants.updatedClassID);
     }
@@ -102,7 +114,7 @@ public class DataHelper extends SQLiteOpenHelper {
         return status;
     }
 
-    public void slotDialog(boolean[] status, final String statusList) {
+    public void slotDialog(final boolean[] status, final String statusList) {
 
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -114,7 +126,7 @@ public class DataHelper extends SQLiteOpenHelper {
         final RadioButton radioButton_slot2 = (RadioButton) dialog.findViewById(R.id.radiobtn2);
         final RadioButton radioButton_slot3 = (RadioButton) dialog.findViewById(R.id.radiobtn3);
         Button button_cancel = (Button) dialog.findViewById(R.id.btn_cancel);
-        Button button_save = (Button) dialog.findViewById(R.id.btn_save);
+        final Button button_save = (Button) dialog.findViewById(R.id.btn_save);
         if (status[0]) {
             textView_slot1Status.setText("FULL");
             textView_slot1Status.setTextColor(Color.RED);
@@ -141,9 +153,12 @@ public class DataHelper extends SQLiteOpenHelper {
         radioButton_slot1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(status[0])
+                    button_save.setText("Replace");
+                else
+                    button_save.setText("Save");
                 radioButton_slot2.setChecked(false);
                 radioButton_slot3.setChecked(false);
-
                 radioButton_slot1.setChecked(true);
 
             }
@@ -152,6 +167,10 @@ public class DataHelper extends SQLiteOpenHelper {
         radioButton_slot2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(status[1])
+                    button_save.setText("Replace");
+                else
+                    button_save.setText("Save");
                 radioButton_slot1.setChecked(false);
                 radioButton_slot3.setChecked(false);
                 radioButton_slot2.setChecked(true);
@@ -163,6 +182,10 @@ public class DataHelper extends SQLiteOpenHelper {
         radioButton_slot3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(status[2])
+                    button_save.setText("Replace");
+                else
+                    button_save.setText("Save");
                 radioButton_slot1.setChecked(false);
                 radioButton_slot2.setChecked(false);
                 radioButton_slot3.setChecked(true);
@@ -202,7 +225,7 @@ public class DataHelper extends SQLiteOpenHelper {
                 }
                 if (radioButton_slot3.isChecked()) {
                     if (textviewStatus3.equals("FULL")) {
-                        confirmationDialog("Data in slot 1 will will be replaced.Go ahead ?", "period3", statusList);
+                        confirmationDialog("Data in slot 3 will will be replaced.Go ahead ?", "period3", statusList);
                     } else {
                         insertdataInperiod("period3", statusList);
                     }
@@ -323,7 +346,6 @@ public class DataHelper extends SQLiteOpenHelper {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
         String date = format.format(calendar.getTime());
-        date = "26-Mar-2016";
         return date;
     }
 

@@ -7,7 +7,7 @@
     <item
         android:title="Done"
         android:id="@+id/btn_done"
-        android:icon="@drawable/done"
+        android:icon="@drawable/checkmarkright"
         app:showAsAction="ifRoom"/>
 
 </menu>

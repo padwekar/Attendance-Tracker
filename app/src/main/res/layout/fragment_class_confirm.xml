@@ -18,11 +18,12 @@
         android:id="@+id/classViewName"
         android:text="B.E I.T"
         android:textSize="30dp"
+        android:textColor="#0288D1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-
     <TextView
+        android:textColor="#0288D1"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:id="@+id/classStrength"
@@ -30,8 +31,17 @@
         android:textSize="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <TextView
 
+     <Button
+         android:layout_alignParentEnd="true"
+         android:layout_alignParentRight="true"
+         android:paddingBottom="50dp"
+         android:background="@drawable/deleteicon"
+         android:layout_width="10dp"
+         android:layout_height="10dp" />
+
+    <TextView
+        android:textColor="#00E676"
         android:id="@+id/tvSectionTitle"
         android:text="Section :"
         android:layout_below="@id/classViewName"
@@ -46,11 +56,13 @@
         android:layout_toRightOf="@id/tvSectionTitle"
         android:layout_below="@id/classViewName"
         android:layout_width="wrap_content"
+        android:textColor="#FFFF00"
         android:layout_height="wrap_content" />
 
 
     <TextView
         android:text="Computer"
+        android:textColor="#FFFF00"
         android:layout_below="@id/classStrength"
         android:layout_alignParentRight="true"
         android:id="@+id/tvDepartment"
@@ -58,6 +70,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:textColor="#00E676"
         android:id="@+id/tvDepartmentTitle"
         android:layout_below="@id/classViewName"
      android:layout_alignParentRight="true"

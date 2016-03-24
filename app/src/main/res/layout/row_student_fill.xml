@@ -7,6 +7,7 @@
 
         <TextView
             android:hint="1"
+            android:textColor="#fff"
             android:textSize="25dp"
             android:id="@+id/createrollNofixed"
             android:layout_width="wrap_content"
@@ -15,7 +16,10 @@
         <EditText
             android:hint=""
             android:textSize="15dp"
-            android:textColor="#000"
+            android:textColor="#fff"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            android:inputType="textCapSentences"
             android:layout_toRightOf="@id/createrollNofixed"
             android:id="@+id/etStudentName"
             android:layout_width="match_parent"

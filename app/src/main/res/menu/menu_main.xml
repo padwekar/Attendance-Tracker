@@ -5,7 +5,7 @@
     <item
         android:title="Next"
         android:id="@+id/btn_next"
-        android:icon="@drawable/nextgo"
+        android:icon="@drawable/arrownext"
         app:showAsAction="ifRoom"/>
 
 

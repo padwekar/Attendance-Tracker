@@ -17,11 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewClassActivity extends AppCompatActivity {
-    DataHelper dataHelper;
+
     RecyclerView recyclerView;
     ShowClassAdapter showClassAdapter ;
     RecyclerView.LayoutManager layoutManager ;
     ArrayList<ClassInfo> classInfoList = new ArrayList<ClassInfo>();
+    DataHelper dataHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,5 +34,10 @@ public class ViewClassActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         showClassAdapter = new ShowClassAdapter(classInfoList);
         recyclerView.setAdapter(showClassAdapter);
+    }
+
+   public void delete(String classid){
+       dataHelper.deleteData(classid);
+
     }
 }

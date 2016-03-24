@@ -1,13 +1,22 @@
 package com.example.savi.atun.Activities;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.savi.atun.Constatnts.Constants;
 import com.example.savi.atun.Database.DataHelper;
@@ -19,12 +28,14 @@ import com.example.savi.atun.R;
 public class ResultActivity extends AppCompatActivity {
     ConfirmClassFrag confirmFrag ;
     ListFragmentClassCreate ClassListCreateFrag ;
+    View coordinatorLayoutView ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         confirmFrag = new ConfirmClassFrag();
         ClassListCreateFrag = new ListFragmentClassCreate();
+        coordinatorLayoutView = (View)findViewById(R.id.snackbarPosition);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_result_top, confirmFrag);
@@ -56,11 +67,34 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void createSuccessDialog(){
+        int total = Constants.updatedTotalStudent ;
+
+        for(int i=0 ; i< total ; i++){
+                if(Constants.studentname[i]==null){
+                    Snackbar snackbar = Snackbar.make(coordinatorLayoutView, "Names cannot be empty", Snackbar.LENGTH_SHORT);
+                    View view = snackbar.getView();
+                    TextView snackbar_msg = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+                    snackbar_msg.setTextColor(Color.RED);
+                    snackbar.show();
+                    return;
+                }
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .hide(confirmFrag).hide(ClassListCreateFrag).commit();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(ResultActivity.this);
         builder.setTitle("Status");
         builder.setMessage("Success");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
         builder.create();
         builder.show();
+
     }
 
 

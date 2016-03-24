@@ -7,21 +7,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.savi.atun.Constatnts.Constants;
 import com.example.savi.atun.Fragments.ConfirmClassFrag;
-import com.example.savi.atun.Fragments.TakeAttendanceFragment;
+import com.example.savi.atun.Fragments.ShowClassListFragment;
 import com.example.savi.atun.R;
 
 import java.util.ArrayList;
 
 public class TakeAttendanceActivity extends AppCompatActivity {
     ArrayList<String> studentList = new ArrayList<String>();
-    TakeAttendanceFragment attendanceFragment;   ConfirmClassFrag confirmClassFrag ;
+    ShowClassListFragment attendanceFragment;   ConfirmClassFrag confirmClassFrag ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_attendance);
-
+        Constants.deleteiconFlag=true;
 
         Intent intent = getIntent();
         String studentString =intent.getStringExtra("studentString");
@@ -29,7 +30,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
        Bundle bundle = new Bundle();
        bundle.putString("studentString", studentString);
 
-        attendanceFragment = new TakeAttendanceFragment();
+        attendanceFragment = new ShowClassListFragment();
         attendanceFragment.setArguments(bundle);
         confirmClassFrag = new ConfirmClassFrag();
         FragmentManager fragmentManager = getSupportFragmentManager();

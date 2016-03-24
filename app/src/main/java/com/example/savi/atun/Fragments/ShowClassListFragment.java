@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by Savi on 20-03-2016.
  */
-public class TakeAttendanceFragment extends Fragment {
+public class ShowClassListFragment extends Fragment {
 
 
     ArrayList<String> studentStatusList ;
