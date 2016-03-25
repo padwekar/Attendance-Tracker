@@ -31,7 +31,7 @@ import java.util.List;
 
 public class DataHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "myattendancedb2";
+    public static final String DATABASE_NAME = "myattendancedbv1";
     public static final String TABLE_CLASS_DATA = "classdata";
     public static final int DATABASE_VERSION = 1;
     public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_CLASS_DATA + "(srno INTEGER PRIMARY KEY AUTOINCREMENT, id TEXT ,name TEXT,section TEXT,department TEXT,strength INTEGER,studentlist TEXT)";
@@ -300,20 +300,37 @@ public class DataHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        String  createQuery = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+" (srno INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,date INTEGER ,period1 TEXT,period2 TEXT,period3 TEXT,period4 TEXT,period5 TEXT)";
+        String  createQuery = "CREATE TABLE IF NOT EXISTS "+TABLE_NAME+" (srno INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,date INTEGER ,period1 TEXT,period2 TEXT,period3 TEXT,xdate TEXT,xmonth TEXT,xyear TEXT)";
         database.execSQL(createQuery);
         values.put("date", getdate());
+        values.put("xdate", getdateno());
+        values.put("xmonth", getMonth());
+        values.put("xyear", getYear());
         Cursor cursor = database.query(TABLE_NAME,null,"date =?",new String[]{getdate()},null,null,null);
         cursor.moveToFirst();
-        try{
-            cursor.getString(1);
-        }catch (Exception ex){
+
+        if(cursor.getCount()<1)
             database.insert(TABLE_NAME,null,values);
-        }
+
         database.close();
 
     }
 
+    public  ArrayList<String> getClassNameList(){
+        ArrayList<String> nameList = new ArrayList<>();
+        SQLiteDatabase database = getReadableDatabase();
+        String query = "SELECT id FROM "+TABLE_CLASS_DATA;
+        Cursor cursor = database.rawQuery(query,null);
+        if(cursor.getCount()<1)
+            return nameList;
+        cursor.moveToFirst();
+        nameList.add(cursor.getString(0));
+        while (cursor.moveToNext()){
+            nameList.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        return nameList;
+    }
     public ArrayList<ClassInfo> getData(){
         boolean cursorStatus = false ;
         ArrayList<ClassInfo> classInfoList = new ArrayList<>();
@@ -321,7 +338,7 @@ public class DataHelper extends SQLiteOpenHelper {
         String query = "SELECT * FROM "+TABLE_CLASS_DATA ;
         Cursor cursor = database.rawQuery(query, null);
 
-        if(cursor!=null) {
+        if(cursor.getCount()>0) {
             cursor.moveToFirst();
             cursorStatus =true ;
         }
@@ -339,6 +356,7 @@ public class DataHelper extends SQLiteOpenHelper {
             }while (!cursor.isAfterLast());
         }
 
+
         return  classInfoList;
     }
 
@@ -347,6 +365,27 @@ public class DataHelper extends SQLiteOpenHelper {
         SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
         String date = format.format(calendar.getTime());
         return date;
+    }
+
+    String getdateno(){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd");
+        String date = format.format(calendar.getTime());
+        return date;
+    }
+
+    String getMonth(){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("MMMM");
+        String month = format.format(calendar.getTime());
+        return month;
+    }
+
+    String getYear(){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy");
+        String year = format.format(calendar.getTime());
+        return year;
     }
 
 }

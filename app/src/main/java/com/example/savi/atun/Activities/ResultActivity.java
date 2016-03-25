@@ -53,8 +53,7 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.btn_done :    createStudentTable();
-                                                    createAttendanceTable(Constants.updatedClassID);
+            case R.id.btn_done :
                                                     createSuccessDialog();
                                                     return true ;
             default: return super.onOptionsItemSelected(item);
@@ -70,7 +69,7 @@ public class ResultActivity extends AppCompatActivity {
         int total = Constants.updatedTotalStudent ;
 
         for(int i=0 ; i< total ; i++){
-                if(Constants.studentname[i]==null){
+                if(Constants.studentname[i]==null||Constants.studentname[i].equals("")){
                     Snackbar snackbar = Snackbar.make(coordinatorLayoutView, "Names cannot be empty", Snackbar.LENGTH_SHORT);
                     View view = snackbar.getView();
                     TextView snackbar_msg = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
@@ -79,11 +78,16 @@ public class ResultActivity extends AppCompatActivity {
                     return;
                 }
         }
+
+        createStudentTable();
+        createAttendanceTable(Constants.updatedClassID);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .hide(confirmFrag).hide(ClassListCreateFrag).commit();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(ResultActivity.this);
+        builder.setCancelable(false);
         builder.setTitle("Status");
         builder.setMessage("Success");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

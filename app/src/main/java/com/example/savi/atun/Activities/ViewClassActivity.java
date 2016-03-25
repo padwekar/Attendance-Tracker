@@ -26,7 +26,7 @@ public class ViewClassActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_class);
+        setContentView(R.layout.class_list_recyclerview);
         dataHelper = new DataHelper(ViewClassActivity.this);
         classInfoList = dataHelper.getData();
         layoutManager = new LinearLayoutManager(this);
@@ -36,9 +36,4 @@ public class ViewClassActivity extends AppCompatActivity {
         recyclerView.setAdapter(showClassAdapter);
     }
 
-   public void delete(String classid){
-    //   DataHelper dbHelper = new DataHelper(ViewClassActivity.this);
-       dataHelper.deleteData(classid);
-
-    }
 }

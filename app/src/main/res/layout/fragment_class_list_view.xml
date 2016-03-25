@@ -20,6 +20,7 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:textColor="#FFF176"
         android:id="@+id/classViewName"
         android:text="CLASS NAME"
         android:textSize="60px"
@@ -40,6 +41,7 @@
         android:layout_marginTop="10dp"
         android:layout_below="@+id/classViewName"
         android:id="@+id/tvSection"
+        android:textColor="#42A5F5"
         android:layout_toRightOf="@+id/tvSectionTitle"
         android:text="SECTION"
         android:layout_width="wrap_content"
@@ -60,6 +62,7 @@
         android:id="@+id/tvDepartment"
         android:layout_toRightOf="@id/tvDepartmentTitle"
         android:text="DEPARTMENT"
+        android:textColor="#42A5F5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -71,6 +74,7 @@
     <TextView
         android:text="Strength"
         android:id="@+id/tvStrengthTitile"
+        android:textColor="#00E676"
 
         android:layout_marginLeft="250dp"
         android:layout_width="wrap_content"
@@ -81,6 +85,7 @@
         android:layout_below="@id/classStrength"
         android:text="60"
         android:textSize="60dp"
+        android:textColor="#42A5F5"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
@@ -98,12 +103,14 @@ android:layout_below="@id/relativelayout"
              android:id="@+id/btn_takeAttendance"
              android:layout_weight="2"
              android:drawablePadding="-30dp"
+             android:textColor="#fff"
              android:text="Attendance"
              android:layout_marginRight="@dimen/activity_horizontal_margin"
              android:background="@drawable/btn_background_custom"
              android:layout_width="match_parent"
              android:layout_height="wrap_content" />
         <Button
+            android:textColor="#fff"
             android:id="@+id/btn_delete_attendance"
             android:layout_weight="2"
             android:drawablePadding="-10dp"

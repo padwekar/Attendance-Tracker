@@ -113,8 +113,9 @@ public class ShowClassAdapter  extends RecyclerView.Adapter<ShowClassAdapter.Vie
                             Constants.updatedSection = section.getText().toString();
                             Constants.updatedClassID = Constants.updatedClassName + Constants.updatedSection;
                             int tempos = getAdapterPosition();
-                            deleteData(Constants.updatedClassID);
+                            classInfos.remove(getAdapterPosition());
                             notifyItemRemoved(tempos);
+                            deleteData(Constants.updatedClassID);
                         }
                     });
                     builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

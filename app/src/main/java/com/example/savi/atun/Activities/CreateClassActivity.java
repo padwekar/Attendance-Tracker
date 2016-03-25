@@ -17,9 +17,12 @@ import android.support.design.widget.Snackbar;
 import android.widget.TextView;
 
 import com.example.savi.atun.Constatnts.Constants;
+import com.example.savi.atun.Database.DataHelper;
 import com.example.savi.atun.Fragments.ConfirmClassFrag;
 import com.example.savi.atun.Fragments.ListFragmentClassCreate;
 import com.example.savi.atun.R;
+
+import java.util.ArrayList;
 
 
 public class CreateClassActivity extends AppCompatActivity {
@@ -27,12 +30,13 @@ public class CreateClassActivity extends AppCompatActivity {
     ConfirmClassFrag confirmClassFrag;
     ListFragmentClassCreate listFragmentClassCreate ;
      View coordinatorLayoutView ;
-
+    DataHelper dataHelper;
+    ArrayList<String> classNameList ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Constants.deleteiconFlag=false;
+        classNameList = new ArrayList<>();
         edittext_classId = (EditText)findViewById(R.id.edittext_classId);
         setclassIDtodisable();
         edittext_className = (EditText)findViewById(R.id.edittext_className);
@@ -44,8 +48,8 @@ public class CreateClassActivity extends AppCompatActivity {
         setTextWatcher(edittext_section);
         setTextWatcher(edittext_department);
         setTextWatcher(edittext_strength);
-
-
+        dataHelper = new DataHelper(CreateClassActivity.this);
+       classNameList = dataHelper.getClassNameList();
         getClassID();
 
     }
@@ -99,8 +103,8 @@ public class CreateClassActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String result = s.toString().replace(" ","");
-                if (!s.toString().equals(result)){
+                String result = s.toString().replace(" ", "");
+                if (!s.toString().equals(result)) {
                     editText.setText(result);
                     editText.setSelection(result.length());
                 }
@@ -117,30 +121,10 @@ public class CreateClassActivity extends AppCompatActivity {
 
     void goToResultActivity(){
 
-    if(edittext_className.getText().toString().equals("")){
-        showSnackbar("Enter Class Name");
+    if(!Validate()){
         return;
     }
 
-    if(edittext_section.getText().toString().equals("")){
-            showSnackbar("Enter Section");
-            return;
-    }
-
-    if(edittext_department.getText().toString().equals("")){
-            showSnackbar("Enter Department");
-            return;
-    }
-
-    if(edittext_strength.getText().toString().equals("")){
-            showSnackbar("Enter Strength");
-            return;
-    }
-
-    if(Integer.parseInt(edittext_strength.getText().toString())>100){
-            showSnackbar("Strength cannot be more than 100");
-            return;
-        }
 
     listFragmentClassCreate = new ListFragmentClassCreate();
      confirmClassFrag = new ConfirmClassFrag();
@@ -166,6 +150,44 @@ public class CreateClassActivity extends AppCompatActivity {
     finish();
 }
 
+    private boolean Validate() {
+        if(edittext_className.getText().toString().equals("")){
+            showSnackbar("Enter Class Name");
+            return false;
+        }
+
+        if(edittext_section.getText().toString().equals("")){
+            showSnackbar("Enter Section");
+            return false;
+        }
+
+        if(edittext_department.getText().toString().equals("")){
+            showSnackbar("Enter Department");
+            return false;
+        }
+
+        if(edittext_strength.getText().toString().equals("")){
+            showSnackbar("Enter Strength");
+            return false;
+        }
+
+        if(Integer.parseInt(edittext_strength.getText().toString())>100){
+            showSnackbar("Strength cannot be more than 100");
+            return false;
+        }
+        String classID = edittext_classId.getText().toString();
+        for(int i=0; i <classNameList.size();i++){
+            if(classNameList.get(i).equalsIgnoreCase(classID)){
+                showSnackbar("Class Section Combination Already Exists");
+                return false;
+            }
+
+        }
+
+
+        return true;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -188,7 +210,6 @@ public class CreateClassActivity extends AppCompatActivity {
         View view = snackbar.getView();
         TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
         tv.setTextColor(Color.RED);
-
         snackbar.show();
         return;
     }
