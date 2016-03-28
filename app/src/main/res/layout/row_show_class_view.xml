@@ -1,0 +1,70 @@
+<RelativeLayout
+    android:id="@+id/relativelayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    />
+        <TextView
+            android:textColor="#FFF176"
+            android:id="@+id/classViewName"
+            android:text="CLASS NAME"
+            android:textStyle="bold"
+            android:textSize="50px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:textColor="#00E676"
+            android:id="@+id/tvSectionTitle"
+            android:text="Section :"
+            android:layout_below="@id/classViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/classViewName"
+            android:id="@+id/tvSection"
+            android:textColor="#42A5F5"
+            android:layout_toRightOf="@+id/tvSectionTitle"
+            android:text="SECTION"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/classStrength"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+
+        <TextView
+            android:id="@+id/classStrengthMain"
+            android:text="60"
+            android:textSize="50dp"
+            android:textColor="#42A5F5"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="Strength"
+            android:id="@+id/tvStrengthTitile"
+            android:layout_toLeftOf="@id/classStrengthMain"
+            android:textColor="#00E676"
+            android:layout_below="@id/classViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+

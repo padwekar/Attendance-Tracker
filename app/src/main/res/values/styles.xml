@@ -32,4 +32,23 @@
         <item name="background">@drawable/backgroundclass2</item>
         <item name="windowActionBarOverlay">true</item>
     </style>
+
+    <!-- Application theme. -->
+    <style name="NightTheme" parent="Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/ViewClassActionBar</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/ViewClassActionBar</item>
+    </style>
+    <!-- ACTION BAR STYLES -->
+    <style name="ViewClassActionBar" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:background">@drawable/viewclasswallpaper2ab</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+
+        <!-- Support library compatibility -->
+        <item name="background">@drawable/viewclasswallpaper2ab</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
 </resources>

@@ -18,8 +18,9 @@
             android:label="@string/title_activity_result" >
         </activity>
         <activity
-            android:theme="@style/AppTheme"
+
             android:name=".Activities.ViewClassActivity"
+            android:theme="@style/NightTheme"
             android:label="@string/title_activity_view_class" >
         </activity>
         <activity
