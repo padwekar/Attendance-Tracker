@@ -26,10 +26,12 @@ public class MonthActivity extends Activity {
         String month[];
         Intent getMonthIntent = getIntent();
         month = getMonthIntent.getStringArrayExtra("monthList");
+        String year = getMonthIntent.getStringExtra("month");
+        String TABLE_NAME = getMonthIntent.getStringExtra("table");
         month = getSortedMonths(month);
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView_monthlist);
     RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),2);
-        ShowMonthAdapter showMonthAdapter = new ShowMonthAdapter(month);
+        ShowMonthAdapter showMonthAdapter = new ShowMonthAdapter(month,year,TABLE_NAME);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(showMonthAdapter);
     }

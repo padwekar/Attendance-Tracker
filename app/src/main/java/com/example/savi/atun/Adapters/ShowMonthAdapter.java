@@ -1,6 +1,7 @@
 package com.example.savi.atun.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,16 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.savi.atun.Activities.ShowAttendancePage;
 import com.example.savi.atun.R;
 
 /**
  * Created by devuser on 29-03-2016.
  */
 public class ShowMonthAdapter extends RecyclerView.Adapter<ShowMonthAdapter.MonthHolder> {
-    String[] month ;
+    String[] month ; String year;String table ;
 
-    public ShowMonthAdapter(String[] month){
+    public ShowMonthAdapter(String[] month,String year,String table){
+        this.table = table;
         this.month = month ;
+        this.year = year;
     }
     @Override
     public MonthHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,10 +42,24 @@ public class ShowMonthAdapter extends RecyclerView.Adapter<ShowMonthAdapter.Mont
 
     class MonthHolder extends RecyclerView.ViewHolder{
         TextView textView_month;
-        public MonthHolder(View itemView) {
+        public MonthHolder(final View itemView) {
             super(itemView);
             textView_month = (TextView)itemView.findViewById(R.id.textview_month);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent showAttendanceIntent = new Intent(itemView.getContext(), ShowAttendancePage.class);
+                    showAttendanceIntent.putExtra("month",textView_month.getText().toString());
+                    showAttendanceIntent.putExtra("year",year);
+                    showAttendanceIntent.putExtra("table",table);
+                    itemView.getContext().startActivity(showAttendanceIntent);
+                }
+            });
         }
+
+
+
     }
 }
 

@@ -362,6 +362,19 @@ public class DataHelper extends SQLiteOpenHelper {
         return  classInfoList;
     }
 
+    public ArrayList<String> getStudentList (int position, String month ,String year,String table){
+        ArrayList<String> studentlist = new ArrayList<>();
+        SQLiteDatabase database = getReadableDatabase();
+        String Query = "SELECT studentlist FROM classdata WHERE id = "+table;
+        String studentString ="" ;
+        Cursor cursor = database.rawQuery(Query,null);
+        if(cursor!=null) {
+            cursor.moveToFirst();
+            studentString = cursor.getString(0);
+        }
+        studentlist = getListFromString(studentString);
+        return studentlist;
+}
     String getdate(){
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
@@ -376,6 +389,13 @@ public class DataHelper extends SQLiteOpenHelper {
         return date;
     }
 
+    private ArrayList<String> getListFromString(String studentStatusList) {
+        ArrayList<String>  studentStatusListInfo = new ArrayList<String>();
+        for(String tempString : studentStatusList.split(",")){
+            studentStatusListInfo.add(tempString);
+        }
+        return  studentStatusListInfo;
+    }
     String getMonth(){
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat format = new SimpleDateFormat("MMMM");

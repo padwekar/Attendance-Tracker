@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_margin="@dimen/activity_vertical_margin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview_roll"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:padding="@dimen/activity_vertical_margin"
+        android:layout_width="50dp"
+        app:cardBackgroundColor="#8BC34A"
+        android:layout_height="50dp">
+    <TextView
+        android:text="1"
+        android:layout_marginTop="12dp"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:id="@+id/textview_rollNo"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp" />
+        </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_toRightOf="@id/cardview_roll"
+        android:padding="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        app:cardBackgroundColor="#50AB47BC"
+        android:layout_height="50dp">
+    <TextView
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:id="@+id/textview_studentName"
+        android:text="Saurabh"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/img_present"
+            android:layout_gravity="end"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/presenticon"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+</android.support.v7.widget.CardView>
+
+    </RelativeLayout>

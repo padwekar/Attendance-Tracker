@@ -41,6 +41,8 @@ public class YearActivity extends Activity {
                 String[] month = monthlist.toArray(new String[monthlist.size()]);
                 Intent monthIntent = new Intent(getApplicationContext(),MonthActivity.class);
                 monthIntent.putExtra("monthList",month);
+                monthIntent.putExtra("year",year);
+                monthIntent.putExtra("table",TABLE_NAME);
                 startActivity(monthIntent);
             }
         });
