@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 import com.example.savi.atun.R;
 
 /**
- * Created by devuser on 24-03-2016.
+ * Created by devuser on 29-03-2016.
  */
-public class ClassListViewFrag extends Fragment {
+public class TabThreeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.row_class_list_view,container,false);
+        View view = inflater.inflate(R.layout.fragment_slot3,container,false);
         return view;
     }
 }

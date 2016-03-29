@@ -1,5 +1,6 @@
 package com.example.savi.atun.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,16 +21,19 @@ public class ViewClassActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager ;
     ArrayList<ClassInfo> classInfoList = new ArrayList<ClassInfo>();
     DataHelper dataHelper;
+    boolean viewMode ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_list_recyclerview_modified);
+        Intent callingIntent = getIntent();
+        viewMode = callingIntent.getBooleanExtra("viewMode",false);
         dataHelper = new DataHelper(ViewClassActivity.this);
         classInfoList = dataHelper.getData();
         layoutManager = new LinearLayoutManager(this);
         recyclerView =(RecyclerView)findViewById(R.id.recyclerView_viewClass);
         recyclerView.setLayoutManager(layoutManager);
-        showClassAdapter = new ShowClassAdapter(ViewClassActivity.this,classInfoList);
+        showClassAdapter = new ShowClassAdapter(ViewClassActivity.this,classInfoList,viewMode);
         recyclerView.setAdapter(showClassAdapter);
     }
 

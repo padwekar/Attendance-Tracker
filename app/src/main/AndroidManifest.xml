@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.savi.atun" >
+    package="com.example.savi.atun">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/MyTheme" >
+        android:theme="@style/MyTheme">
         <activity
-            android:theme="@style/AppTheme"
             android:name=".Activities.CreateClassActivity"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" />
         <activity
-
             android:name=".Activities.ResultActivity"
-            android:label="@string/title_activity_result" >
-        </activity>
+            android:label="@string/title_activity_result" />
         <activity
-
             android:name=".Activities.ViewClassActivity"
-            android:theme="@style/NightTheme"
-            android:label="@string/title_activity_view_class" >
-        </activity>
+            android:label="@string/title_activity_view_class"
+            android:theme="@style/NightTheme" />
         <activity
             android:name=".Activities.HomeActivity"
-            android:label="@string/title_activity_home2" >
+            android:label="@string/title_activity_home2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,10 +28,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/AppTheme"
             android:name=".Activities.TakeAttendanceActivity"
-            android:label="@string/title_activity_take_attendance" >
-        </activity>
+            android:label="@string/title_activity_take_attendance"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Activities.ShowAttendanceActivity" />
+        <activity android:name=".Activities.YearActivity" />
+        <activity android:name=".Activities.MonthActivity"></activity>
     </application>
 
 </manifest>

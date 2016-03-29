@@ -24,8 +24,8 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.btn_viewClass:
                 viewClass();
                 break;
-            case R.id.btn_takeAttendance:
-                takeAttendance();
+            case R.id.btn_viewAttendance:
+                viewAttendance();
                 break;
             case R.id.btn_settings:
                 changeSetting();
@@ -44,8 +44,9 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void takeAttendance() {
-        Toast.makeText(this, "THIS FEATURE NOT AVAILABLE IN FREE VERSION", Toast.LENGTH_SHORT).show();
+    private void viewAttendance() {
+        intent = new Intent(HomeActivity.this, ShowAttendanceActivity.class);
+        startActivity(intent);
     }
 
     private void changeSetting() {

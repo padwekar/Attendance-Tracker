@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
+import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 
 public class DataHelper extends SQLiteOpenHelper {
@@ -388,5 +390,41 @@ public class DataHelper extends SQLiteOpenHelper {
         return year;
     }
 
+    public Set<String> getYearList(String TABLE_NAME) {
+        Set<String> yearList = new ArraySet<>();
+        SQLiteDatabase database = getReadableDatabase() ;
+        String Query = "SELECT xyear FROM "+TABLE_NAME ;
+        Cursor cursor = database.rawQuery(Query,null);
+        if(cursor.getCount()<0){
+            return yearList;
+        }
+        cursor.moveToFirst();
+
+
+            while (!cursor.isAfterLast()) {
+                yearList.add(cursor.getString(0));
+                cursor.moveToNext();
+            }
+        return yearList;
+    }
+
+
+    public Set<String> getMonthList(String TABLE_NAME, String YEAR){
+        Set<String> monthList = new ArraySet<>();
+        SQLiteDatabase database = getReadableDatabase() ;
+        String Query = "SELECT xmonth FROM "+TABLE_NAME+" WHERE xyear ="+YEAR ;
+        Cursor cursor = database.rawQuery(Query,null);
+        if(cursor.getCount()<0){
+            return monthList;
+        }
+        cursor.moveToFirst();
+
+
+        while (!cursor.isAfterLast()) {
+            monthList.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        return monthList;
+    }
 }
 

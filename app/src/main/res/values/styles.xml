@@ -43,12 +43,12 @@
     </style>
     <!-- ACTION BAR STYLES -->
     <style name="ViewClassActionBar" parent="@style/Widget.AppCompat.ActionBar">
-        <item name="android:background">@drawable/viewclasswallpaper2ab</item>
+        <item name="android:background">@drawable/viewclasswallpaper2</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:textColorPrimary">#FFFFFF</item>
 
         <!-- Support library compatibility -->
-        <item name="background">@drawable/viewclasswallpaper2ab</item>
+        <item name="background">@drawable/viewclasswallpaper2</item>
         <item name="windowActionBarOverlay">true</item>
     </style>
 </resources>
