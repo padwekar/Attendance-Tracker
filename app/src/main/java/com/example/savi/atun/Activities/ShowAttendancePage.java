@@ -2,6 +2,7 @@ package com.example.savi.atun.Activities;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
@@ -27,10 +28,11 @@ import java.util.List;
  * Created by devuser on 29-03-2016.
  */
 public class ShowAttendancePage extends AppCompatActivity {
-    TextView textview_month , textView_date ;
+    TextView textview_month , textView_date , textview_year ;
     ImageButton  btn_prev ,btn_next ;
     FragmentTransaction fragmentTransaction ;
     FragmentManager fragmentManager ;
+    TabLayout tabLayout ;
     PagerAdapter adapter;
     DataHelper dataHelper ;
     ViewPager viewPager;
@@ -46,12 +48,16 @@ public class ShowAttendancePage extends AppCompatActivity {
         setContentView(R.layout.activity_view_attendance_main);
         textView_date = (TextView)findViewById(R.id.textview_date);
         textview_month = (TextView)findViewById(R.id.textview_month);
+        textview_year = (TextView)findViewById(R.id.textview_year);
         btn_prev = (ImageButton)findViewById(R.id.btn_prev);
         btn_next = (ImageButton)findViewById(R.id.btn_next);
         fragmentManager = getSupportFragmentManager();
         Intent getMonth = getIntent();
         month = getMonth.getStringExtra("month");
+        textview_month.setText(month);
+        textView_date.setText(0 +"");
         year = getMonth.getStringExtra("year");
+        textview_year.setText(year);
         table = getMonth.getStringExtra("table");
         fragmentTransaction = fragmentManager.beginTransaction();
         slot1Objects = new ArrayList<>();
@@ -63,11 +69,12 @@ public class ShowAttendancePage extends AppCompatActivity {
 
 // Get the number of days in that month
        final int daysInMonth = mycal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
         //Tab
-        TabLayout tabLayout = (TabLayout)findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("PREV"));
-        tabLayout.addTab(tabLayout.newTab().setText("NOW"));
-        tabLayout.addTab(tabLayout.newTab().setText("NEXT"));
+         tabLayout = (TabLayout)findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("SLOT 1"));
+        tabLayout.addTab(tabLayout.newTab().setText("SLOT 2"));
+        tabLayout.addTab(tabLayout.newTab().setText("SLOT 3"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         //Pager Adapter
@@ -134,7 +141,7 @@ public class ShowAttendancePage extends AppCompatActivity {
 
     private void setList(int date, String month ,String year,String table) {
        ArrayList<String> studentlist = dataHelper.getStudentList(table);
-        HashMap<String,String> map = dataHelper.checkslotstatusgetData(date+"",month,year,table);
+        HashMap<String,String> map = dataHelper.checkslotstatusgetData(date + "", month, year, table);
 
         if(map.size()==0){
             slot1Objects = new ArrayList<>();
@@ -142,18 +149,21 @@ public class ShowAttendancePage extends AppCompatActivity {
             slot3Objects = new ArrayList<>();
         }else
         {
-            if (map.get("period1") == "")
+            if (map.get("period1") == ""){
                 slot1Objects = new ArrayList<>();
+            }
             else
                 slot1Objects = null;
 
-            if (map.get("period2") == "")
+            if (map.get("period2") == ""){
                 slot2Objects = new ArrayList<>();
+          }
             else
                 slot2Objects = null;
 
-            if (map.get("period3") == "")
+            if (map.get("period3") == ""){
                 slot3Objects = new ArrayList<>();
+           }
             else
                 slot3Objects = null;
 
@@ -177,6 +187,9 @@ public class ShowAttendancePage extends AppCompatActivity {
                 }
             }
         }
+
+
+
         adapter.setSuperLists(slot1Objects,slot2Objects,slot3Objects);
 
     }

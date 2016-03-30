@@ -52,7 +52,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 1 :
                 TabTwoFragment secondFragment = new TabTwoFragment();
                 Bundle bundleSecond = new Bundle();
-                bundleSecond.putParcelableArrayList("tab2",prevList);
+                bundleSecond.putParcelableArrayList("tab2",currList);
                 secondFragment.setArguments(bundleSecond);
                 return  secondFragment ;
 

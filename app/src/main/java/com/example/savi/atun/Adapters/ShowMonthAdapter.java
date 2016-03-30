@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.savi.atun.Activities.ShowAttendancePage;
@@ -42,12 +43,12 @@ public class ShowMonthAdapter extends RecyclerView.Adapter<ShowMonthAdapter.Mont
     }
 
     class MonthHolder extends RecyclerView.ViewHolder{
-        TextView textView_month;
+        TextView textView_month;ImageView img_month;
         public MonthHolder(final View itemView) {
             super(itemView);
             textView_month = (TextView)itemView.findViewById(R.id.textview_month);
-
-            textView_month.setOnClickListener(new View.OnClickListener() {
+            img_month= (ImageView)itemView.findViewById(R.id.image_month);
+            img_month.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent showAttendanceIntent = new Intent(itemView.getContext(), ShowAttendancePage.class);

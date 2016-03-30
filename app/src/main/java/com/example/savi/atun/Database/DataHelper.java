@@ -108,12 +108,12 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
 
-    public HashMap<String,String> checkslotstatusgetData(String date,String month ,String year ,String table){
+    public HashMap<String,String>
+    checkslotstatusgetData(String date,String month ,String year ,String table){
         String period1="",period2="",period3="" ;
         HashMap<String,String> map = new HashMap<>();
         boolean status[]={false,false,false};
         SQLiteDatabase database = getReadableDatabase() ;
-     //   Cursor cursor = database.query(table,null,"xdate =? AND xmonth =? AND xyear =?",new String[]{date,month,year},null,null,null);
 
         if(Integer.parseInt(date)<10){
             date = "0"+date;
