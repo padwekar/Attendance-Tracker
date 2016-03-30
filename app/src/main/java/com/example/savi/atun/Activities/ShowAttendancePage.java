@@ -20,6 +20,7 @@ import com.example.savi.atun.R;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -34,9 +35,9 @@ public class ShowAttendancePage extends AppCompatActivity {
     DataHelper dataHelper ;
     ViewPager viewPager;
     String month , year , table ;
-    List<StudentInfo> slot1Objects ;
-    List<StudentInfo> slot2Objects ;
-    List<StudentInfo> slot3Objects ;
+    ArrayList<StudentInfo> slot1Objects ;
+    ArrayList<StudentInfo> slot2Objects ;
+    ArrayList<StudentInfo> slot3Objects ;
     int position = 0;
     int tabPos ;
     @Override
@@ -57,7 +58,8 @@ public class ShowAttendancePage extends AppCompatActivity {
         slot2Objects = new ArrayList<>();
         slot3Objects = new ArrayList<>();
         dataHelper = new DataHelper(getApplicationContext());
-        Calendar mycal = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month) , 1);
+
+        Calendar mycal = new GregorianCalendar(2016 ,3 , 1);
 
 // Get the number of days in that month
        final int daysInMonth = mycal.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -130,8 +132,53 @@ public class ShowAttendancePage extends AppCompatActivity {
         });
     }
 
-    private void setList(int position, String month ,String year,String table) {
-     //   ArrayList<String> getStudentList = dataHelper
+    private void setList(int date, String month ,String year,String table) {
+       ArrayList<String> studentlist = dataHelper.getStudentList(table);
+        HashMap<String,String> map = dataHelper.checkslotstatusgetData(date+"",month,year,table);
+
+        if(map.size()==0){
+            slot1Objects = new ArrayList<>();
+            slot2Objects = new ArrayList<>();
+            slot3Objects = new ArrayList<>();
+        }else
+        {
+            if (map.get("period1") == "")
+                slot1Objects = new ArrayList<>();
+            else
+                slot1Objects = null;
+
+            if (map.get("period2") == "")
+                slot2Objects = new ArrayList<>();
+            else
+                slot2Objects = null;
+
+            if (map.get("period3") == "")
+                slot3Objects = new ArrayList<>();
+            else
+                slot3Objects = null;
+
+            if (slot1Objects == null) {
+                slot1Objects = new ArrayList<>();
+                for (int i = 0; i < studentlist.size(); i++) {
+                    slot1Objects.add(new StudentInfo(i + 1, studentlist.get(i), map.get("period1").charAt(i)== '1' ? true : false));
+                }
+            }
+
+            if (slot2Objects == null) {
+                slot2Objects = new ArrayList<>();
+                for (int i = 0; i < studentlist.size(); i++) {
+                    slot2Objects.add(new StudentInfo(i + 1, studentlist.get(i), map.get("period2").charAt(i) == '1' ? true : false));
+                }
+            }
+            if (slot3Objects == null) {
+                slot3Objects = new ArrayList<>();
+                for (int i = 0; i < studentlist.size(); i++) {
+                    slot3Objects.add(new StudentInfo(i + 1, studentlist.get(i), map.get("period3").charAt(i) == '1' ? true : false));
+                }
+            }
+        }
+        adapter.setSuperLists(slot1Objects,slot2Objects,slot3Objects);
+
     }
 
 

@@ -26,7 +26,7 @@ public class MonthActivity extends Activity {
         String month[];
         Intent getMonthIntent = getIntent();
         month = getMonthIntent.getStringArrayExtra("monthList");
-        String year = getMonthIntent.getStringExtra("month");
+        String year = getMonthIntent.getStringExtra("year");
         String TABLE_NAME = getMonthIntent.getStringExtra("table");
         month = getSortedMonths(month);
         recyclerView = (RecyclerView)findViewById(R.id.recyclerView_monthlist);

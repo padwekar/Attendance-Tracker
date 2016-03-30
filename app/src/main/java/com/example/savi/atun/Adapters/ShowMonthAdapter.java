@@ -16,6 +16,7 @@ import com.example.savi.atun.R;
  * Created by devuser on 29-03-2016.
  */
 public class ShowMonthAdapter extends RecyclerView.Adapter<ShowMonthAdapter.MonthHolder> {
+
     String[] month ; String year;String table ;
 
     public ShowMonthAdapter(String[] month,String year,String table){
@@ -46,7 +47,7 @@ public class ShowMonthAdapter extends RecyclerView.Adapter<ShowMonthAdapter.Mont
             super(itemView);
             textView_month = (TextView)itemView.findViewById(R.id.textview_month);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            textView_month.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent showAttendanceIntent = new Intent(itemView.getContext(), ShowAttendancePage.class);

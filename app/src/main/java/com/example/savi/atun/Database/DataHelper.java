@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -105,6 +106,55 @@ public class DataHelper extends SQLiteOpenHelper {
 
         return status;
     }
+
+
+    public HashMap<String,String> checkslotstatusgetData(String date,String month ,String year ,String table){
+        String period1="",period2="",period3="" ;
+        HashMap<String,String> map = new HashMap<>();
+        boolean status[]={false,false,false};
+        SQLiteDatabase database = getReadableDatabase() ;
+     //   Cursor cursor = database.query(table,null,"xdate =? AND xmonth =? AND xyear =?",new String[]{date,month,year},null,null,null);
+
+        if(Integer.parseInt(date)<10){
+            date = "0"+date;
+        }
+
+        Cursor cursor = database.rawQuery("select * from " + table
+                + " where xdate = ? AND xmonth = ? AND xyear = ?", new String[]{date,month,year});
+
+        if(!cursor.moveToFirst())
+            return map;
+
+        if(cursor.getString(2)==null)
+        {  status[0]=false;}
+        else{
+            status[0]=true;
+            period1 = cursor.getString(2);
+        }
+
+        if(cursor.getString(3)==null)
+        { status[1]=false;}
+        else {
+            status[1] = true;
+            period2 = cursor.getString(3);
+        }
+
+        if(cursor.getString(4)==null)
+        { status[2]=false;}
+        else {
+            status[2] = true;
+            period3 = cursor.getString(4);
+        }
+
+        map.put("period1",period1);
+        map.put("period2",period2);
+        map.put("period3",period3);
+
+        return map;
+
+    }
+
+
 
     public void slotDialog(final boolean[] status, final String statusList) {
 
@@ -362,15 +412,16 @@ public class DataHelper extends SQLiteOpenHelper {
         return  classInfoList;
     }
 
-    public ArrayList<String> getStudentList (int position, String month ,String year,String table){
+    public ArrayList<String> getStudentList (String table){
         ArrayList<String> studentlist = new ArrayList<>();
         SQLiteDatabase database = getReadableDatabase();
-        String Query = "SELECT studentlist FROM classdata WHERE id = "+table;
+        String Query = "SELECT * FROM "+TABLE_CLASS_DATA;
         String studentString ="" ;
-        Cursor cursor = database.rawQuery(Query,null);
+        Cursor cursor = database.query(TABLE_CLASS_DATA, null, "id =?", new String[]{table}, null,null,null);
+
         if(cursor!=null) {
             cursor.moveToFirst();
-            studentString = cursor.getString(0);
+            studentString = cursor.getString(6);
         }
         studentlist = getListFromString(studentString);
         return studentlist;

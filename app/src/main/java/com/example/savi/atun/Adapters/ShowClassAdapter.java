@@ -31,7 +31,8 @@ public class ShowClassAdapter  extends RecyclerView.Adapter<ShowClassAdapter.Vie
     DataHelper dataHelper ;
     ArrayList<ClassInfo> classInfos = new ArrayList<>();
     ViewClassActivity viewClassActivity = new ViewClassActivity();
-    public ShowClassAdapter(Context context,ArrayList<ClassInfo> classInfos,boolean viewMode) {
+    public
+    ShowClassAdapter(Context context,ArrayList<ClassInfo> classInfos,boolean viewMode) {
         this.classInfos = classInfos;
         this.context =context;
         this.viewMode = viewMode;
