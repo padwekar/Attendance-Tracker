@@ -28,6 +28,11 @@ public class ViewClassActivity extends AppCompatActivity {
         setContentView(R.layout.class_list_recyclerview_modified);
         Intent callingIntent = getIntent();
         viewMode = callingIntent.getBooleanExtra("viewMode",false);
+        if(viewMode)
+            getSupportActionBar().setTitle("Show Attendance");
+        else
+            getSupportActionBar().setTitle("Take Attendance");
+
         dataHelper = new DataHelper(ViewClassActivity.this);
         classInfoList = dataHelper.getData();
         layoutManager = new LinearLayoutManager(this);

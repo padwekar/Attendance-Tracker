@@ -7,7 +7,15 @@
 
     tools:context=".Activities.MainActivity">
 
+    <FrameLayout
+        android:id="@+id/framelayout_class_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </FrameLayout>
+
+
     <RelativeLayout
+        android:layout_below="@+id/framelayout_class_details"
         android:id="@+id/relativeLayout"
         android:orientation="horizontal"
         android:layout_width="match_parent"

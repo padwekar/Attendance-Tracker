@@ -14,6 +14,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        getSupportActionBar().setTitle("AttendanceSimplifier");
     }
 
     public void onHomeOptionSelected(View view) {
@@ -50,7 +51,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void changeSetting() {
-        Toast.makeText(this, "THIS FEATURE NOT AVAILABLE IN FREE VERSION", Toast.LENGTH_SHORT).show();
+        intent = new Intent(HomeActivity.this, CircleProcessing.class);
+        startActivity(intent);
 
     }
 }

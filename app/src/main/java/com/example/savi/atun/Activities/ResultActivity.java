@@ -1,6 +1,7 @@
 package com.example.savi.atun.Activities;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -31,7 +33,9 @@ public class ResultActivity extends AppCompatActivity {
     View coordinatorLayoutView ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("Fill Student List");
         setContentView(R.layout.activity_result);
         confirmFrag = new ConfirmClassFrag();
         ClassListCreateFrag = new ListFragmentClassCreate();
@@ -52,10 +56,26 @@ public class ResultActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        final ProgressDialog progressDialog = new ProgressDialog(ResultActivity.this);
+        progressDialog.setMessage("Saving..");
         switch (item.getItemId()){
+
             case R.id.btn_done :
-                                                    createSuccessDialog();
-                                                    return true ;
+                progressDialog.show();
+                new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    createSuccessDialog();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.dismiss();
+                        }
+                    });
+                }
+
+            }).start();
+                return true ;
             default: return super.onOptionsItemSelected(item);
         }
     }
@@ -66,6 +86,8 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void createSuccessDialog(){
+
+
         int total = Constants.updatedTotalStudent ;
 
         for(int i=0 ; i< total ; i++){
@@ -86,7 +108,7 @@ public class ResultActivity extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .hide(confirmFrag).hide(ClassListCreateFrag).commit();
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(ResultActivity.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(ResultActivity.this);
         builder.setCancelable(false);
         builder.setTitle("Status");
         builder.setMessage("Success");
@@ -96,8 +118,13 @@ public class ResultActivity extends AppCompatActivity {
                 finish();
             }
         });
-        builder.create();
-        builder.show();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                builder.create();
+                builder.show();
+            }
+        });
 
     }
 

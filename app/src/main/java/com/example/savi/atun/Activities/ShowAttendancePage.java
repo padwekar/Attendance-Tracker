@@ -10,12 +10,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.savi.atun.Adapters.PagerAdapter;
 import com.example.savi.atun.Beans.StudentInfo;
 import com.example.savi.atun.Database.DataHelper;
+import com.example.savi.atun.Fragments.ClassDetailsSmall;
 import com.example.savi.atun.R;
 
 import java.util.ArrayList;
@@ -36,7 +38,8 @@ public class ShowAttendancePage extends AppCompatActivity {
     PagerAdapter adapter;
     DataHelper dataHelper ;
     ViewPager viewPager;
-    String month , year , table ;
+    ClassDetailsSmall classDetailsFragmemt ;
+    String month , year , table , name , strength ;
     ArrayList<StudentInfo> slot1Objects ;
     ArrayList<StudentInfo> slot2Objects ;
     ArrayList<StudentInfo> slot3Objects ;
@@ -44,7 +47,9 @@ public class ShowAttendancePage extends AppCompatActivity {
     int tabPos ;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_view_attendance_main);
         textView_date = (TextView)findViewById(R.id.textview_date);
         textview_month = (TextView)findViewById(R.id.textview_month);
@@ -52,10 +57,14 @@ public class ShowAttendancePage extends AppCompatActivity {
         btn_prev = (ImageButton)findViewById(R.id.btn_prev);
         btn_next = (ImageButton)findViewById(R.id.btn_next);
         fragmentManager = getSupportFragmentManager();
+        classDetailsFragmemt = new ClassDetailsSmall();
         Intent getMonth = getIntent();
         month = getMonth.getStringExtra("month");
+        name = getMonth.getStringExtra("name");
+        strength = getMonth.getStringExtra("strength");
         textview_month.setText(month);
         textView_date.setText(0 +"");
+        setClassDetailFragment();
         year = getMonth.getStringExtra("year");
         textview_year.setText(year);
         table = getMonth.getStringExtra("table");
@@ -193,7 +202,16 @@ public class ShowAttendancePage extends AppCompatActivity {
         adapter.setSuperLists(slot1Objects,slot2Objects,slot3Objects);
 
     }
-
+    private void setClassDetailFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.framelayout_class_details, classDetailsFragmemt);
+        Bundle bundle = new Bundle();
+        bundle.putString("name",name);
+        bundle.putString("strength",strength);
+        classDetailsFragmemt.setArguments(bundle);
+        fragmentTransaction.commit();
+    }
 
 }
 

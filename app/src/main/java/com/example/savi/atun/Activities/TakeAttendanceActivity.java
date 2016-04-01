@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.savi.atun.Constatnts.Constants;
 import com.example.savi.atun.Fragments.ConfirmClassFrag;
@@ -27,7 +28,6 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_attendance);
         Constants.deleteiconFlag=true;
-
         Intent intent = getIntent();
         String studentString =intent.getStringExtra("studentString");
 

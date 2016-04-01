@@ -35,6 +35,7 @@ public class CreateClassActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("Create Class");
         setContentView(R.layout.activity_main);
         classNameList = new ArrayList<>();
         edittext_classId = (EditText)findViewById(R.id.edittext_classId);

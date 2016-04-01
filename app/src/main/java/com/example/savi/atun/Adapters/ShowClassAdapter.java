@@ -109,8 +109,12 @@ public class ShowClassAdapter  extends RecyclerView.Adapter<ShowClassAdapter.Vie
                     Set<String> yearList ;
                     yearList = dataHelper.getYearList(TABLENAME);
                     String[] years;
+                    String name  = className.getText().toString();
+                    String strengthme = strength.getText().toString();
                     years = yearList.toArray(new String[yearList.size()]);
                     Intent yearIntent = new Intent(context, YearActivity.class);
+                    yearIntent.putExtra("name",name);
+                    yearIntent.putExtra("strength",strengthme);
                     yearIntent.putExtra("tablename",TABLENAME);
                     yearIntent.putExtra("yearlist",years);
                     context.startActivity(yearIntent);

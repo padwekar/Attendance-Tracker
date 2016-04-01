@@ -19,11 +19,13 @@ import com.example.savi.atun.R;
 public class ShowMonthAdapter extends RecyclerView.Adapter<ShowMonthAdapter.MonthHolder> {
 
     String[] month ; String year;String table ;
-
-    public ShowMonthAdapter(String[] month,String year,String table){
+    String className , classStrength;
+    public ShowMonthAdapter(String[] month,String year,String table,String className,String classStrength ){
         this.table = table;
         this.month = month ;
         this.year = year;
+        this.className = className ;
+        this.classStrength = classStrength ;
     }
     @Override
     public MonthHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -55,6 +57,8 @@ public class ShowMonthAdapter extends RecyclerView.Adapter<ShowMonthAdapter.Mont
                     showAttendanceIntent.putExtra("month",textView_month.getText().toString());
                     showAttendanceIntent.putExtra("year",year);
                     showAttendanceIntent.putExtra("table",table);
+                    showAttendanceIntent.putExtra("name",className);
+                    showAttendanceIntent.putExtra("strength",classStrength);
                     itemView.getContext().startActivity(showAttendanceIntent);
                 }
             });

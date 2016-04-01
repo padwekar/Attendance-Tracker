@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -245,6 +246,7 @@ public class DataHelper extends SQLiteOpenHelper {
         button_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String textviewStatus1 = textView_slot1Status.getText().toString();
                 String textviewStatus2 = textView_slot2Status.getText().toString();
                 String textviewStatus3 = textView_slot3Status.getText().toString();
@@ -263,6 +265,7 @@ public class DataHelper extends SQLiteOpenHelper {
 
                     } else {
                         insertdataInperiod("period2", statusList);
+
                     }
                 }
                 if (radioButton_slot3.isChecked()) {

@@ -6,7 +6,6 @@
   <android.support.v7.widget.RecyclerView
     android:id="@+id/next_frag_list"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

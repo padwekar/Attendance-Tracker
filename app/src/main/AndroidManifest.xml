@@ -32,9 +32,12 @@
             android:label="@string/title_activity_take_attendance"
             android:theme="@style/AppTheme" />
         <activity android:name=".Activities.ShowAttendanceActivity" />
-        <activity android:name=".Activities.YearActivity" />
-        <activity android:name=".Activities.MonthActivity"></activity>
-        <activity android:name=".Activities.ShowAttendancePage"></activity>
+        <activity
+            android:name=".Activities.YearActivity"
+     ></activity>
+        <activity android:name=".Activities.MonthActivity" />
+        <activity android:name=".Activities.ShowAttendancePage" />
+        <activity android:name=".Activities.CircleProcessing"></activity>
     </application>
 
 </manifest>
